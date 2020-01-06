@@ -1,9 +1,9 @@
 require('dotenv').config();
 
-import { Client } from "discord.js";
-import { loadEvents, loadCommands } from './core/eventManager';
+const Discord = require("discord.js");
+const EventManager = require('./core/eventManager');
 
-const client = new Client({ partials: ["CHANNEL", "MESSAGE"] });
+const client = new Discord.Client({ partials: ["CHANNEL", "MESSAGE"] });
 const path = require('path');
 
 client.login(process.env.TOKEN);
@@ -11,5 +11,5 @@ client.login(process.env.TOKEN);
 const eventsDir = path.join(__dirname, 'events');
 const commandsDir = path.join(__dirname, 'commands');
 
-loadEvents(eventsDir, client);
-loadCommands(commandsDir, client);
+EventManager.loadEvents(eventsDir, client);
+EventManager.loadCommands(commandsDir, client);
