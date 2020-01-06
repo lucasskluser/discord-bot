@@ -2,7 +2,12 @@ const Discord = require('discord.js');
 const fileSystem = require('fs').promises;
 const path = require('path');
 
-export function loadEvents(directory, client) {
+module.exports = (client, basePath) => {
+  loadEvents(path.join(basePath, 'events'), client);
+  loadCommands(path.join(basePath, 'commands'), client);
+}
+
+function loadEvents(directory, client) {
   client.events = new Discord.Collection();
 
   let total = 0;
@@ -28,7 +33,7 @@ export function loadEvents(directory, client) {
   .catch(err => console.log(err));
 }
 
-export function loadCommands(directory, client) {
+function loadCommands(directory, client) {
   client.commands = new Discord.Collection();
   client.aliases = new Discord.Collection();
 
