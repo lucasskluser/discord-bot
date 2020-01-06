@@ -1,4 +1,4 @@
-import { addRole } from '../core/roleManager';
+const RoleManager = require('../core/roleManager');
 
 module.exports = async (client, reaction, user) => {
   if (reaction.message.partial) await reaction.message.fetch();
@@ -10,5 +10,5 @@ module.exports = async (client, reaction, user) => {
 
   if (member.user.bot) return;
 
-  addRole(roleName, member, reaction.message.guild);
+  RoleManager.addRole(roleName, member, reaction.message.guild);
 }

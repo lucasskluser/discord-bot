@@ -1,9 +1,9 @@
-import { Collection } from 'discord.js';
+const Discord = require('discord.js');
 const fileSystem = require('fs').promises;
 const path = require('path');
 
 export function loadEvents(directory, client) {
-  client.events = new Collection();
+  client.events = new Discord.Collection();
 
   let total = 0;
   let carregados = 0;
@@ -29,8 +29,8 @@ export function loadEvents(directory, client) {
 }
 
 export function loadCommands(directory, client) {
-  client.commands = new Collection();
-  client.aliases = new Collection();
+  client.commands = new Discord.Collection();
+  client.aliases = new Discord.Collection();
 
   let total = 0;
   let carregados = 0;

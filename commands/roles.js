@@ -1,4 +1,4 @@
-import { RichEmbed } from 'discord.js';
+const Discord = require('discord.js');
 
 module.exports = (client, message) => {
   if (message.channel.type === "dm") return;
@@ -8,7 +8,7 @@ module.exports = (client, message) => {
     "Olá, Freelancer! Para acessar outros canais em nosso servidor, reaja de acordo com suas preferências abaixo."
   );
 
-  const plataformas = new RichEmbed();
+  const plataformas = new Discord.RichEmbed();
   plataformas.setTitle("Definição de Plataforma");
   plataformas.setColor("RED");
   plataformas.setDescription(
@@ -16,7 +16,7 @@ module.exports = (client, message) => {
   );
   message.channel.send(plataformas);
 
-  const lancas = new RichEmbed();
+  const lancas = new Discord.RichEmbed();
   lancas.setTitle("Definição opcional de Lança");
   lancas.setColor("GREEN");
   lancas.setDescription(
@@ -24,13 +24,13 @@ module.exports = (client, message) => {
   );
   message.channel.send(lancas);
 
-  // const lore = new RichEmbed();
+  // const lore = new Discord.RichEmbed();
   // lore.setTitle("Torne-se um Arcanista");
   // lore.setColor("BLUE");
   // lore.setDescription("Reaja abaixo se você deseja acessar os canais de discussões sobre a história de Anthem.");
   // message.channel.send(lore);
 
-  const builds = new RichEmbed();
+  const builds = new Discord.RichEmbed();
   builds.setTitle("Torne-se o próximo Arden Vassa");
   builds.setColor("BLUE");
   builds.setDescription(

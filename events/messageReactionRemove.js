@@ -1,4 +1,4 @@
-import { removeRole } from "./../core/managers/roleManager";
+const RoleManager = require('../core/roleManager');
 
 module.exports = async (client, reaction, user) => {
   if (reaction.message.partial) await reaction.message.fetch();
@@ -10,5 +10,5 @@ module.exports = async (client, reaction, user) => {
 
   if (member.user.bot) return;
 
-  removeRole(roleName, member, reaction.message.guild);
+  RoleManager.removeRole(roleName, member, reaction.message.guild);
 };
