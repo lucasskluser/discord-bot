@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 import { Client } from "discord.js";
-import { loadEvents, loadCommands } from './core/managers/eventManager';
+import { loadEvents, loadCommands } from './core/eventManager';
 
 const client = new Client({ partials: ["CHANNEL", "MESSAGE"] });
 const path = require('path');

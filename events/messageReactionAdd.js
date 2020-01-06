@@ -1,4 +1,4 @@
-import { addRole } from './../core/managers/roleManager';
+import { addRole } from '../core/roleManager';
 
 module.exports = async (client, reaction, user) => {
   if (reaction.message.partial) await reaction.message.fetch();
