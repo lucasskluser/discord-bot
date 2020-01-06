@@ -23,13 +23,14 @@ const port = process.env.PORT || 3000;
 
 app.get('/', function(req, res){
     res.sendStatus(200);
+});
 
 app.listen(port);
 
 setInterval(() => {
     console.log('Pinging to keep alive...');
     http.get(`https://anthem-bot-br.herokuapp.com/`);
-}, 30000 ); //1740000
+}, 30000); //1740000
 
 /**
  * Inicialização dos registradores de eventos
