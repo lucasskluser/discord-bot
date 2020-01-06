@@ -1,7 +1,6 @@
 import { addRole } from './../core/managers/roleManager';
 
 module.exports = async (client, reaction, user) => {
-
   if (reaction.message.partial) await reaction.message.fetch();
 
   var roleName = reaction.emoji.name;
