@@ -27,10 +27,18 @@ app.get('/', function(req, res){
 
 app.listen(port);
 
+/**
+ * Autoping para manter o servidor ativo
+ * 
+ * Realiza uma requisição HTTP GET a cada 29 minutos
+ * para manter o servidor online no Heroku
+ */
+const http = require('http');
+
 setInterval(() => {
     console.log('Pinging to keep alive...');
     http.get(`https://anthem-bot-br.herokuapp.com/`);
-}, 30000); //1740000
+}, 1740000);
 
 /**
  * Inicialização dos registradores de eventos
