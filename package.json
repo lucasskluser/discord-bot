@@ -4,6 +4,7 @@
   "description": "Bot do servidor brasileiro de Anthem",
   "main": "app.js",
   "scripts": {
+    "build": "npm install",
     "start": "node ."
   },
   "author": "Lucas Samuel Kluser",
