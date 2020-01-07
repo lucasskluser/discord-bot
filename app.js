@@ -33,11 +33,11 @@ app.listen(port);
  * Realiza uma requisição HTTP GET a cada 29 minutos
  * para manter o servidor online no Heroku
  */
-const http = require('http');
+const https = require('https');
 
 setInterval(() => {
     console.log('Pinging to keep alive...');
-    http.get(`https://anthem-bot-br.herokuapp.com/`);
+    https.get(`https://anthem-bot-br.herokuapp.com/`);
 }, 1740000);
 
 /**
