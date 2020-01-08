@@ -4,6 +4,8 @@ module.exports = (client, packet) => {
 
   const channel = client.channels.get(packet.d.channel_id);
 
+  if (!channel || channel.type === 'dm') return;
+
   if (channel.messages.has(packet.d.message_id)) return;
 
   channel.fetchMessage(packet.d.message_id).then(message => {
