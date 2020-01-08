@@ -11,7 +11,6 @@
   "dependencies": {
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "require-all": "^3.0.0"
+    "express": "^4.17.1"
   }
 }
