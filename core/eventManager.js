@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fileSystem = require('fs').promises;
 const path = require('path');
 
-module.exports = (client, basePath) => {
+module.exports = (client, basePath, environment) => {
   loadEvents(path.join(basePath, 'events'), client);
   loadCommands(path.join(basePath, 'commands'), client);
 }
