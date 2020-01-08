@@ -50,4 +50,4 @@ const EventManager = require('./core/eventManager');
 const client = new Discord.Client({ partials: ["CHANNEL", "MESSAGE"] });
 client.login(process.env.TOKEN);
 
-EventManager(client, __dirname, process.env.NODE_ENV);
+EventManager(client, __dirname);
