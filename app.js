@@ -14,6 +14,13 @@
 require('dotenv').config();
 
 /**
+ * Inicialização do monitoramento de exceções
+ * do Sentry
+ */
+const Sentry = require('@sentry/node');
+Sentry.init({ dsn: 'https://62761952009d40b4aabd06d01de10411@sentry.io/1875279' });
+
+/**
  * Inicialização do servidor express embutido
  * do NodeJS para manter a aplicação online
  */
