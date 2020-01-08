@@ -49,8 +49,8 @@ function addRoleReactions(message) {
     );
 
     if (lore) {
-      builds.message
-        .react("662875147287658502")
+      lore.message
+        .react("664285135490777108")
         .catch(err => console.log(err));
     }
 

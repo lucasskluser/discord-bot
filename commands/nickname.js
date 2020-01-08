@@ -11,5 +11,5 @@ module.exports = (client, message) => {
     .catch(err => {
       console.log(err);
       message.channel.send('Ops, não consegui alterar o seu apelido. :confused:');
-    });
+    })
 };

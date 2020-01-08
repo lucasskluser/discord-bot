@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
 module.exports = (client, message) => {
   if (message.channel.type === "dm") return;
@@ -24,11 +24,13 @@ module.exports = (client, message) => {
   );
   message.channel.send(lancas);
 
-  // const lore = new Discord.RichEmbed();
-  // lore.setTitle("Torne-se um Arcanista");
-  // lore.setColor("BLUE");
-  // lore.setDescription("Reaja abaixo se você deseja acessar os canais de discussões sobre a história de Anthem.");
-  // message.channel.send(lore);
+  const lore = new Discord.RichEmbed();
+  lore.setTitle("Torne-se um Arcanista");
+  lore.setColor("BLUE");
+  lore.setDescription(
+    "Reaja abaixo se você deseja acessar os canais de discussões sobre a história de Anthem."
+  );
+  message.channel.send(lore);
 
   const builds = new Discord.RichEmbed();
   builds.setTitle("Torne-se o próximo Arden Vassa");
