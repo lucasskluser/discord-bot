@@ -2,9 +2,12 @@ const Discord = require('discord.js');
 const fileSystem = require('fs').promises;
 const path = require('path');
 
+const ignoreOnDevelopment = [
+  'guildMemberAdd', 'messageReactionAdd', 'messageReactionRemove', 'message'
+];
+
 module.exports = (client, basePath) => {
   loadEvents(path.join(basePath, 'events'), client);
-  loadCommands(path.join(basePath, 'commands'), client);
 }
 
 function loadEvents(directory, client) {
@@ -21,6 +24,9 @@ function loadEvents(directory, client) {
       if (!file.endsWith(".js")) return;
 
       let eventName = file.substring(0, file.indexOf(".js"));
+      
+      if (process.env.NODE_ENV.includes('development') && ignoreOnDevelopment.includes(eventName)) return;
+
       let event = require(path.join(directory, eventName));
 
       client.on(eventName, event.bind(null, client));

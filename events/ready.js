@@ -1,3 +1,4 @@
 module.exports = (client) => {
-    console.log(`${client.user.username} está online!`);
+    console.log(`Logado como ${client.user.tag}! (${client.user.id})`);
+    client.user.setActivity('Anthem™');
 }
