@@ -13,10 +13,10 @@ module.exports = class NicknameCommand extends Command {
         {
           key: "nickname",
           prompt: "Qual o apelido que você quer usar?",
-          type: "string",
-          default: ""
+          type: "string"
         }
-      ]
+      ],
+      argsType: 'single'
     });
   }
 
