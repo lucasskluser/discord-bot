@@ -61,7 +61,7 @@ const { CommandoClient } = require("discord.js-commando");
 const client = new CommandoClient({
   commandPrefix: "!",
   owner: "352932842944069643",
-  invite: "https://discord.gg/xgmEGg",
+  invite: "https://discord.gg/gCHzfxF",
   unknownCommandResponse: false
 });
 
