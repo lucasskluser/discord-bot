@@ -6,21 +6,19 @@
  *
  * Após isso, os eventos e os comandos do bot são registrados.
  *
+ * @version 2.0.0
+ * @date 17/01/2020
  * @since 03/01/2020
- * @version 1.2.1
  * @author Lucas Samuel Kluser
  */
-
-const path = require("path");
 require("dotenv").config();
 
-console.log(`Aplicação iniciada em ${process.env.NODE_ENV}`)
-
-if (process.env.NODE_ENV === "production") {
-  /**
-   * Inicialização do monitoramento de exceções
-   * do Sentry
-   */
+/**
+ * Se o app estiver em ambiente de produção,
+ * carrega o monitor de exceções, servidor Express
+ * e realiza um autoping a cada 29min
+ */
+if (process.env.ENV === "production") {
   const Sentry = require("@sentry/node");
   Sentry.init({ dsn: process.env.SENTRY_DSN });
 
@@ -47,38 +45,22 @@ if (process.env.NODE_ENV === "production") {
   const https = require("https");
 
   setInterval(() => {
-    console.log("Pinging to keep alive...");
-    https.get(`https://anthem-bot-br.herokuapp.com/`);
+    console.log("Autorequisição para manter o servidor ativo...");
+    https.get(process.env.HEROKU_URL);
   }, 1740000);
 }
 
 /**
- * Inicialização dos registradores de eventos
- * e comandos do bot
+ * Inicialização do cliente Akairo
  */
-const { CommandoClient } = require("discord.js-commando");
+const { AkairoClient } = require("discord-akairo");
 
-const client = new CommandoClient({
-  commandPrefix: "!",
-  owner: "352932842944069643",
-  invite: "https://discord.gg/gCHzfxF",
-  unknownCommandResponse: false
+const client = new AkairoClient({
+  ownerID: process.env.OWNER_ID,
+  prefix: process.env.PREFIX,
+  commandDirectory: "./commands/",
+  listenerDirectory: "./listeners/",
+  allowMention: true
 });
 
-client.registry
-  .registerDefaultTypes()
-  .registerGroups([
-    ["utils", "Utilidade"],
-    ["user", "Para usuários"]
-  ])
-  .registerDefaultGroups()
-  .registerDefaultCommands({
-    help: false,
-    prefix: false
-  })
-  .registerCommandsIn(path.join(__dirname, "commands"));
-
 client.login(process.env.TOKEN);
-
-const EventManager = require("./core/eventManager");
-EventManager(client, __dirname);

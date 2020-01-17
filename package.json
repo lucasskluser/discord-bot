@@ -1,13 +1,11 @@
 {
   "name": "AnthemBot",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "author": "Lucas Samuel Kluser",
   "description": "Bot do servidor brasileiro de Anthem",
   "main": "app.js",
   "scripts": {
-    "start": "npm run prod",
-    "prod": "set NODE_ENV=production && node .",
-    "dev": "set NODE_ENV=development && node ."
+    "start": "node ."
   },
   "husky": {
     "hooks": {
@@ -18,12 +16,11 @@
     }
   },
   "dependencies": {
-    "@sentry/node": "^5.11.0",
+    "@sentry/node": "^5.11.1",
+    "discord-akairo": "^7.5.6",
     "discord.js": "^11.5.1",
-    "discord.js-commando": "^0.10.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "firebase": "^7.6.1"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.4",
