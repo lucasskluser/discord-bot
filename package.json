@@ -1,16 +1,36 @@
 {
   "name": "AnthemBot",
-  "version": "1.2.0",
+  "version": "2.0.0",
+  "author": "Lucas Samuel Kluser",
   "description": "Bot do servidor brasileiro de Anthem",
   "main": "app.js",
   "scripts": {
-    "build": "npm install",
     "start": "node ."
   },
-  "author": "Lucas Samuel Kluser",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "hooks": {
+        "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+      }
+    }
+  },
   "dependencies": {
+    "@sentry/node": "^5.11.1",
+    "discord-akairo": "^7.5.6",
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.4",
+    "@commitlint/config-conventional": "^8.3.4",
+    "cz-conventional-changelog": "^3.0.2",
+    "husky": "^4.0.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

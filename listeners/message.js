@@ -1,21 +1,21 @@
-module.exports = (client, message) => {
-  if (message.author.bot) {
-    addRoleReactions(message);
-    return;
+const { Listener } = require("discord-akairo");
+
+module.exports = class MessageListener extends Listener {
+  constructor() {
+    super("message", {
+      emitter: "client",
+      eventName: "message"
+    });
   }
 
-  if (!message.content.startsWith('!')) return;
+  exec(message) {
+    if (!message.author.bot || message.author.id !== this.client.user.id) {
+      return;
+    }
 
-  let messageArray = message.content.split(" ");
-  let cmd = messageArray[0];
-  let args = messageArray.slice(1);
-
-  let command = client.commands.get(cmd.slice(process.env.PREFIX.length));
-  
-  if(!command) return;
-  
-  command(client,message,args);
-}
+    addRoleReactions(message);
+  }
+};
 
 function addRoleReactions(message) {
   if (message.embeds) {
@@ -49,9 +49,7 @@ function addRoleReactions(message) {
     );
 
     if (lore) {
-      builds.message
-        .react("662875147287658502")
-        .catch(err => console.log(err));
+      lore.message.react("664285135490777108").catch(err => console.log(err));
     }
 
     const builds = message.embeds.find(
@@ -59,10 +57,9 @@ function addRoleReactions(message) {
     );
 
     if (builds) {
-      builds.message
-        .react("662875147287658502")
-        .catch(err => console.log(err));
+      builds.message.react("662875147287658502").catch(err => console.log(err));
     }
   }
+
   return;
 }
