@@ -12,18 +12,27 @@ module.exports = class HelpCommand extends Command {
           id: "command",
           type: "string",
           default: "all"
+        },
+        {
+          id: "user",
+          type: "user",
+          match: "prefix",
+          prefix: "-u=",
+          default: message => message.author
         }
       ]
     });
   }
 
   exec(message, args) {
+    const user = args.user || message.author;
     const member = this.client.guilds
       .get(process.env.GUILD_ID)
-      .members.get(message.author.id);
+      .members.get(user.id);
 
     const commands = new RichEmbed();
     const data = new Date(message.createdAt);
+    const prefix = process.env.PREFIX;
 
     commands.setColor("BLUE");
     commands.setFooter(
@@ -39,7 +48,7 @@ module.exports = class HelpCommand extends Command {
     if (args.command === "all") {
       commands.setTitle("Alguém precisa de ajuda?");
       commands.setDescription(
-        `Comandos disponíveis para o seu usuário.\nPara mais informações, use \`?${this.id} <comando>\``
+        `Comandos disponíveis para o seu usuário.\nPara mais informações, use **\`${prefix}${this.id} <comando>\`**`
       );
 
       this.client.commandHandler.categories.forEach(category => {
@@ -58,20 +67,24 @@ module.exports = class HelpCommand extends Command {
 
           if (command.enabled && hasPermission) {
             if (command.description !== "") {
-              list += `**\`?${command}\`** - ${command.description}\n`;
+              list += `**\`${prefix}${command}\`** - ${command.description}\n`;
             } else {
-              list += `**\`?${command}\`**\n`;
+              list += `**\`${prefix}${command}\`**\n`;
             }
           }
         });
 
-        commands.addField(category.id, list);
+        if (list !== "") {
+          commands.addField(category.id, list);
+        }
       });
     } else {
       const command = this.client.commandHandler.findCommand(args.command);
 
-      if (command === null) {
-        message.reply(`Não encontrei o comando \`${args.command}\``);
+      if (command === null || command === undefined) {
+        message.reply(
+          `Não encontrei o comando **\`${prefix}${args.command}\`**.`
+        );
         return;
       }
 
@@ -80,7 +93,12 @@ module.exports = class HelpCommand extends Command {
     }
 
     if (message.channel instanceof TextChannel) {
-      message.reply("enviei no privado.");
+      if (user.id !== message.author.id) {
+        message.reply(`enviei no privado para ${user.tag}.`);
+      } else {
+        message.reply(`enviei no privado.`);
+      }
+
       member.send(commands);
     } else {
       member.send(commands);

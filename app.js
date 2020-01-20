@@ -53,14 +53,6 @@ if (process.env.ENV === "production") {
 /**
  * Inicialização do cliente Akairo
  */
-const { AkairoClient } = require("discord-akairo");
-
-const client = new AkairoClient({
-  ownerID: process.env.OWNER_ID,
-  prefix: process.env.PREFIX,
-  commandDirectory: "./commands/",
-  listenerDirectory: "./listeners/",
-  allowMention: true
-});
-
+const BotClient = require('./core/botClient');
+const client = new BotClient();
 client.login(process.env.TOKEN);
